@@ -11,3 +11,25 @@ L_z = diff(L, z)
 L_l = diff(L, l)
 solutions = solve([L_x, L_y, L_z,L_l], [x, y,z, l])
 print("Solutions:", solutions)
+
+
+
+OR
+
+
+from sympy import *
+x,y,z,lamda=symbols('x y z lamda')
+cir=x**2+y**2+z**2-1
+f=(x-3)**2+(y-4)**2+(z-12)**2
+l=f+lamda*cir
+sol=solve((diff(l,x),
+           diff(l,y),
+           diff(l,z),
+           diff(l,lamda)),
+            (x,y,z,lamda),dict=True)
+final=[]
+for i in sol:
+  print("the x,y,z is",((i[x], i[y], i[z])))
+  final.append(f.subs(i))
+print("the minima is",min(final))
+print("the maxima is",max(final))
